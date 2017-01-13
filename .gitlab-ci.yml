@@ -1,0 +1,16 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - build
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN gitlab.itvet.co.uk:4567
+
+build:
+  stage: build
+  script:
+    - docker build --pull -t gitlab.itvet.co.uk:4567/jacob.mansfield/sonarqube-docker .
+    - docker push gitlab.itvet.co.uk:4567/jacob.mansfield/sonarqube-docker

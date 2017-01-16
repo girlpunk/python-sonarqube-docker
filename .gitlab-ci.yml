@@ -5,6 +5,11 @@ services:
 
 stages:
   - build
+  - release
+
+variables:
+  CONTAINER_TEST_IMAGE: gitlab.itvet.co.uk/jacob.mansfield/sonarqube-docker:$CI_BUILD_REF_NAME
+  CONTAINER_RELEASE_IMAGE: gitlab.itvet.co.uk/jacob.mansfield/sonarqube-docker:latest
 
 before_script:
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN gitlab.itvet.co.uk:4567
@@ -12,5 +17,14 @@ before_script:
 build:
   stage: build
   script:
-    - docker build --pull -t gitlab.itvet.co.uk:4567/jacob.mansfield/sonarqube-docker .
-    - docker push gitlab.itvet.co.uk:4567/jacob.mansfield/sonarqube-docker
+    - docker build --pull -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
+
+release-image:
+  stage: release
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $DOCKER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
+  only:
+    - master

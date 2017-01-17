@@ -38,6 +38,7 @@ RUN set -x \
 	&& apt-get install -y \
 		openjdk-8-jdk \
 		ca-certificates-java \
+		pylint \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& [ "$JAVA_HOME" = "$(docker-java-home)" ]
 

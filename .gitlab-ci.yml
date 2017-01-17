@@ -8,8 +8,8 @@ stages:
   - release
 
 variables:
-  CONTAINER_TEST_IMAGE: gitlab.itvet.co.uk/jacob.mansfield/sonarqube-docker:$CI_BUILD_REF_NAME
-  CONTAINER_RELEASE_IMAGE: gitlab.itvet.co.uk/jacob.mansfield/sonarqube-docker:latest
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
 
 before_script:
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN gitlab.itvet.co.uk:4567

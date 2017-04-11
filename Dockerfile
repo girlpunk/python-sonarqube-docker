@@ -6,7 +6,6 @@ FROM openjdk:8-jdk
 #       really hairy.
 
 RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
-RUN echo 'deb http://ppa.launchpad.net/spotify-jyrki/dh-virtualenv/ubuntu trusty main' > /etc/apt/sources.list.d/spotify-dh-virtualenv.list
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		unzip \

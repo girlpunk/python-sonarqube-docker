@@ -5,14 +5,17 @@ FROM python:2.7
 #  2. Compiling OpenJDK also requires the JDK to be installed, and it gets
 #       really hairy.
 
+RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
+RUN echo 'deb http://ppa.launchpad.net/spotify-jyrki/dh-virtualenv/ubuntu trusty main' > /etc/apt/sources.list.d/spotify-dh-virtualenv.list
+RUN echo 'deb-src http://ppa.launchpad.net/spotify-jyrki/dh-virtualenv/ubuntu trusty main' /etc/apt/sources.list.d/spotify-dh-virtualenv.list
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		bzip2 \
 		unzip \
 		xz-utils \
 		unzip \
+		dh-virtualenv \
 && rm -rf /var/lib/apt/lists/*
-
-RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
 
 # Default to UTF-8 file.encoding
 ENV LANG C.UTF-8

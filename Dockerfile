@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		unzip \
 		dh-virtualenv \
 		build-essential \
+		python-setuptools \
 && rm -rf /var/lib/apt/lists/*
 
 # Default to UTF-8 file.encoding

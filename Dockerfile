@@ -1,4 +1,4 @@
-FROM python:2.7
+FROM openjdk:8-jdk
 
 # A few problems with compiling Java from source:
 #  1. Oracle.  Licensing prevents us from redistributing the official JDK.
@@ -10,7 +10,6 @@ RUN echo 'deb http://ppa.launchpad.net/spotify-jyrki/dh-virtualenv/ubuntu trusty
 RUN echo 'deb-src http://ppa.launchpad.net/spotify-jyrki/dh-virtualenv/ubuntu trusty main' /etc/apt/sources.list.d/spotify-dh-virtualenv.list
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-		bzip2 \
 		unzip \
 		xz-utils \
 		unzip \
@@ -42,11 +41,7 @@ RUN set -x \
 		openjdk-8-jdk \
 		ca-certificates-java \
 		pylint \
-	&& rm -rf /var/lib/apt/lists/* \
-	&& [ "$JAVA_HOME" = "$(docker-java-home)" ]
-
-# see CA_CERTIFICATES_JAVA_VERSION notes above
-RUN /var/lib/dpkg/info/ca-certificates-java.postinst configure
+&& rm -rf /var/lib/apt/lists/*
 
 RUN \
 	wget https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-2.8.zip \

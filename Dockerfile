@@ -11,10 +11,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		unzip \
 		xz-utils \
 		unzip \
-		dh-virtualenv \
 		build-essential \
 		python-setuptools \
-&& rm -rf /var/lib/apt/lists/*
+		debhelper \
+	&& apt-get -t jessie-backports install -y --no-install-recommends \
+		dh-virtualenv \
+	&& rm -rf /var/lib/apt/lists/*
 
 # Default to UTF-8 file.encoding
 ENV LANG C.UTF-8

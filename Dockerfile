@@ -7,14 +7,13 @@ FROM openjdk:8-jdk
 
 RUN echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
 RUN echo 'deb http://ppa.launchpad.net/spotify-jyrki/dh-virtualenv/ubuntu trusty main' > /etc/apt/sources.list.d/spotify-dh-virtualenv.list
-RUN echo 'deb-src http://ppa.launchpad.net/spotify-jyrki/dh-virtualenv/ubuntu trusty main' /etc/apt/sources.list.d/spotify-dh-virtualenv.list
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 49C29687
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		unzip \
 		xz-utils \
 		unzip \
 		dh-virtualenv \
+		build-essential \
 && rm -rf /var/lib/apt/lists/*
 
 # Default to UTF-8 file.encoding
